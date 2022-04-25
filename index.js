@@ -5,7 +5,7 @@ require('dotenv').config()
 
 app.use(express.json());
 
-app.use('/spells', router)
+app.use(router)
 
 app.get('/', (req, res) => {
   res.json('Hello World')
