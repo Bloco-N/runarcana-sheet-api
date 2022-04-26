@@ -1,7 +1,9 @@
+require('dotenv').config()
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const SignUpRequestValidator = require('../validations/SignUpRequest');
 const SignInRequestValidator = require('../validations/SignInRequest');
+const jwt = require('jsonwebtoken');
 
 const registerUser = async (req, res) => {
   const { username, password } = req.body;
@@ -28,12 +30,21 @@ const loginUser = async (req, res) => {
 
     await SignInRequestValidator.validate(req.body);
     const user = await User.findOne({ where: { username } });
+    const { JWT_SECRET } = process.env;
     if (!user) throw {
       status: 400,
       message: "User or Password invalid"
     }
     if (await bcrypt.compare(password, user.password)) {
-      return res.status(200).json({ message: "You have successfully logged in" })
+      const payload = {
+        id: user.id,
+        username: user.username
+      }
+      const token = jwt.sign(payload, JWT_SECRET, { expiresIn: 8000 });
+      return res.status(200).json({
+        message: "You have successfully logged in",
+        token
+      })
     } else {
       throw {
         status: 400,
