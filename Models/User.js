@@ -11,7 +11,10 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       allowNull: false
     },
     nickname: DataTypes.STRING,
-    password: DataTypes.STRING
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   })
 
   return User;
