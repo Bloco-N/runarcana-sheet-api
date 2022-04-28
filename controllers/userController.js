@@ -1,5 +1,5 @@
 require('dotenv').config()
-const db = require('../modelos');
+const db = require('../models');
 const User = db.user;
 const bcrypt = require('bcrypt');
 const SignUpRequestValidator = require('../validations/SignUpRequest');
