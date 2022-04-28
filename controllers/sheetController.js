@@ -1,4 +1,4 @@
-const db = require('../models');
+const db = require('../modelos');
 const CreateSheetRequestValidator = require('../validations/CreateSheetRequest');
 const User = db.user;
 const Sheet = db.sheet;
