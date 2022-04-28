@@ -7,6 +7,10 @@ const checkLogin = require('./middlewares/checkLogin');
 
 // user endpoints
 
+router.get('/test', (req, res) => {
+  res.status(200).json('test');
+})
+
 router.post('/sign-up', userController.registerUser);
 router.post('/sign-in', userController.loginUser);
 
