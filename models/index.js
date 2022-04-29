@@ -17,8 +17,8 @@ sequelize = new Sequelize(process.env.DATABASE_URL, {
 
     await sequelize.authenticate()
     console.log('Successful database connection');
-    // await sequelize.sync({ alter: true });
-    // console.log("All models were synchronized successfully.");
+    await sequelize.sync({ alter: true });
+    console.log("All models were synchronized successfully.");
 
   } catch (error) {
     console.error(`Connection Failed with error: ${error}`);
