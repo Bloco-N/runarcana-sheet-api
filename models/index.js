@@ -2,11 +2,15 @@ const { Sequelize, DataTypes } = require('sequelize');
 require('dotenv').config()
 const { DB_DATABASE, DB_USERNAME, DB_PASSWORD, DB_HOST } = process.env;
 
-const sequelize = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
-  host: DB_HOST,
-  dialect: 'postgres',
-  ssl: true
-});
+sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
+}
+);
 
 (async () => {
   try {
