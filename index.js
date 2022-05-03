@@ -15,4 +15,4 @@ app.get('/', (req, res) => {
 })
 
 
-app.listen(process.env.PORT || 8000, () => console.log(`server listening on port ${process.env.PORT || 8000}`));
+app.listen(process.env.PORT, () => console.log(`server listening on port ${process.env.PORT}`));
