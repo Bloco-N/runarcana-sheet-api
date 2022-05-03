@@ -1,1 +1,1 @@
-release: npm run migrate
+release: ./release-tasks.sh
