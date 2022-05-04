@@ -21,12 +21,12 @@ db = {}
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.user = require('./User.js')(sequelize, Sequelize, DataTypes);
-db.sheet = require('./Sheet.js')(sequelize, Sequelize, DataTypes);
+db.character = require('./Character.js')(sequelize, Sequelize, DataTypes);
+db.runarcanaClass = require('./RunarcanaClass.js')(sequelize, Sequelize, DataTypes);
 db.charClass = require('./CharClass.js')(sequelize, Sequelize, DataTypes);
-db.sheetClass = require('./SheetClass.js')(sequelize, Sequelize, DataTypes);
-db.user.hasMany(db.sheet, { foreignKey: 'user_id' });
-db.sheet.belongsTo(db.user, { foreignKey: 'user_id' });
-db.charClass.belongsToMany(db.sheet, { through: db.sheetClass, foreignKey: 'class_id', otherKey: 'sheet_id' })
-db.sheet.belongsToMany(db.charClass, { through: db.sheetClass, foreignKey: 'sheet_id', otherKey: 'class_id' })
+db.user.hasMany(db.character, { foreignKey: 'user_id' });
+db.character.belongsTo(db.user, { foreignKey: 'user_id' });
+db.runarcanaClass.belongsToMany(db.character, { through: db.charClass, foreignKey: 'class_id', otherKey: 'char_id' })
+db.character.belongsToMany(db.runarcanaClass, { through: db.charClass, foreignKey: 'char_id', otherKey: 'class_id' })
 
 module.exports = db;

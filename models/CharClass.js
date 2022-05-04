@@ -3,11 +3,18 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true,
+      autoIncrement: true
+    },
+    sheet_id: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
-    name: {
-      type: DataTypes.STRING,
+    class_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    level: {
+      type: DataTypes.INTEGER,
       allowNull: false
     }
   })

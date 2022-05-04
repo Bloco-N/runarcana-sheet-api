@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize, DataTypes) => {
-  const Sheet = sequelize.define("Sheets", {
+  const Character = sequelize.define("Characters", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -9,28 +9,32 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    char_name: {
+    name: {
       type: DataTypes.STRING,
+      allowNull: false
+    },
+    level: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     origin: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     region: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     past: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     alignment: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false
     }
 
   })
 
-  return Sheet;
+  return Character;
 }

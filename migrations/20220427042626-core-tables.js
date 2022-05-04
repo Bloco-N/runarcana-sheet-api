@@ -31,7 +31,7 @@ module.exports = {
       }
     });
 
-    await queryInterface.createTable('Sheets', {
+    await queryInterface.createTable('Characters', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -46,24 +46,24 @@ module.exports = {
         },
         onDelete: 'CASCADE'
       },
-      char_name: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false
       },
       origin: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       region: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       past: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       alignment: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false
       },
       createdAt: {
@@ -78,7 +78,7 @@ module.exports = {
       }
     })
 
-    await queryInterface.createTable('CharClasses', {
+    await queryInterface.createTable('RunarcanaClasses', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -101,17 +101,17 @@ module.exports = {
       }
     })
 
-    await queryInterface.createTable('SheetClasses', {
+    await queryInterface.createTable('CharClasses', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
-      sheet_id: {
+      char_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Sheets',
+          model: 'Characters',
           key: 'id'
         },
       },
@@ -119,7 +119,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'CharClasses',
+          model: 'RunarcanaClasses',
           key: 'id'
         },
       },
@@ -143,10 +143,10 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
 
-    await queryInterface.dropTable('SheetClasses');
-    await queryInterface.dropTable('Sheets');
-    await queryInterface.dropTable('Users');
     await queryInterface.dropTable('CharClasses');
+    await queryInterface.dropTable('Characters');
+    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('RunarcanaClasses');
 
   }
 };
