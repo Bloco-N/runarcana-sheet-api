@@ -3,35 +3,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
 
-    await queryInterface.createTable('Users', {
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-      },
-      username: {
-        type: Sequelize.STRING,
-        unique: true,
-        allowNull: false
-      },
-      nickname: Sequelize.STRING,
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      createdAt: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-      },
-      updatedAt: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-      }
-    });
-
-    await queryInterface.createTable('Origins', {
+    await queryInterface.createTable('Ranges', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -53,7 +25,7 @@ module.exports = {
       }
     });
 
-    await queryInterface.createTable('Regions', {
+    await queryInterface.createTable('Conjurations', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -75,7 +47,7 @@ module.exports = {
       }
     });
 
-    await queryInterface.createTable('Pasts', {
+    await queryInterface.createTable('Durations', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -97,7 +69,7 @@ module.exports = {
       }
     });
 
-    await queryInterface.createTable('Alignments', {
+    await queryInterface.createTable('Spells', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -107,89 +79,39 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      createdAt: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-      },
-      updatedAt: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-      }
-    });
-
-    await queryInterface.createTable('Characters', {
-      id: {
+      level: {
         type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+        allowNull: false
       },
-      user_id: {
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      range_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Users',
-          key: 'id'
-        },
-        onDelete: 'CASCADE'
-      },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      origin: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Origins',
+          model: 'Ranges',
           key: 'id'
         }
       },
-      region: {
+      conjuration_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Regions',
+          model: 'Conjurations',
           key: 'id'
         }
       },
-      past: {
+      duration_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Pasts',
+          model: 'Durations',
           key: 'id'
         }
       },
-      alignment: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Alignments',
-          key: 'id'
-        }
-      },
-      createdAt: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-      },
-      updatedAt: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-      }
-    });
-
-    await queryInterface.createTable('RunarcanaClasses', {
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false
-      },
-      name: {
+      materials: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -205,7 +127,60 @@ module.exports = {
       }
     });
 
-    await queryInterface.createTable('CharClasses', {
+    await queryInterface.createTable('Mysteries', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      description: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      createdAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      },
+      updatedAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      }
+    });
+
+    await queryInterface.createTable('Components', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      symbol: {
+        type: Sequelize.CHAR,
+        allowNull: false
+      },
+      createdAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      },
+      updatedAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      }
+    });
+
+
+    await queryInterface.createTable('SpellBooks', {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -217,7 +192,143 @@ module.exports = {
         references: {
           model: 'Characters',
           key: 'id'
-        },
+        }
+      },
+      spell_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Spells',
+          key: 'id'
+        }
+      },
+      createdAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      },
+      updatedAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      }
+    });
+
+    await queryInterface.createTable('SpellOrigins', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      spell_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        refereces: {
+          model: 'Spells',
+          key: 'id'
+        }
+      },
+      origin_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        refereces: {
+          model: 'Origins',
+          key: 'id'
+        }
+      },
+      createdAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      },
+      updatedAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      }
+    });
+
+    await queryInterface.createTable('SpellMysteries', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      spell_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Spells',
+          key: 'id'
+        }
+      },
+      mystery_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Mysteries',
+          key: 'id'
+        }
+      },
+      createdAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      },
+      updatedAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      }
+    });
+
+    await queryInterface.createTable('SpellComponents', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      spell_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Spells',
+          key: 'id'
+        }
+      },
+      component_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Components',
+          key: 'id'
+        }
+      },
+      createdAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      },
+      updatedAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      }
+    });
+
+    await queryInterface.createTable('SpellClasses', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      spell_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Spells',
+          key: 'id'
+        }
       },
       class_id: {
         type: Sequelize.INTEGER,
@@ -225,11 +336,7 @@ module.exports = {
         references: {
           model: 'RunarcanaClasses',
           key: 'id'
-        },
-      },
-      level: {
-        type: Sequelize.INTEGER,
-        allowNull: false
+        }
       },
       createdAt: {
         type: Sequelize.DATEONLY,
@@ -246,15 +353,16 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-
-    await queryInterface.dropTable('CharClasses');
-    await queryInterface.dropTable('Characters');
-    await queryInterface.dropTable('Alignments');
-    await queryInterface.dropTable('Pasts');
-    await queryInterface.dropTable('Regions');
-    await queryInterface.dropTable('Origins');
-    await queryInterface.dropTable('Users');
-    await queryInterface.dropTable('RunarcanaClasses');
-
+    await queryInterface.dropTable('SpellClasses');
+    await queryInterface.dropTable('SpellComponents');
+    await queryInterface.dropTable('SpellMysteries');
+    await queryInterface.dropTable('SpellOrigins');
+    await queryInterface.dropTable('SpellBooks');
+    await queryInterface.dropTable('Components');
+    await queryInterface.dropTable('Mysteries');
+    await queryInterface.dropTable('Spells');
+    await queryInterface.dropTable('Durations');
+    await queryInterface.dropTable('Conjurations');
+    await queryInterface.dropTable('Ranges');
   }
 };

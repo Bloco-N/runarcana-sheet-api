@@ -9,8 +9,8 @@ sequelize = new Sequelize(DATABASE_URL);
 
     await sequelize.authenticate()
     console.log('Successful database connection');
-    await sequelize.sync({ alter: true });
-    console.log("All models were synchronized successfully.");
+    // await sequelize.sync({ alter: true });
+    // console.log("All models were synchronized successfully.");
 
   } catch (error) {
     console.error(`Connection Failed with error: ${error}`);
@@ -37,8 +37,8 @@ db.conjuration = require('./Conjuration.js')(sequelize, Sequelize, DataTypes);
 db.duration = require('./Duration.js')(sequelize, Sequelize, DataTypes);
 db.range = require('./Range.js')(sequelize, Sequelize, DataTypes);
 db.spellBook = require('./SpellBook.js')(sequelize, Sequelize, DataTypes);
-db.spellComponent = require('./Component.js')(sequelize, Sequelize, DataTypes);
-db.spellMystery = require('./SpellMistery.js')(sequelize, Sequelize, DataTypes);
+db.spellComponent = require('./SpellComponent')(sequelize, Sequelize, DataTypes);
+db.spellMystery = require('./SpellMystery.js')(sequelize, Sequelize, DataTypes);
 db.spellOrigin = require('./SpellOrigin.js')(sequelize, Sequelize, DataTypes);
 db.spellClass = require('./SpellClass.js')(sequelize, Sequelize, DataTypes);
 db.alignment = require('./Alignment.js')(sequelize, Sequelize, DataTypes);
