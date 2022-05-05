@@ -223,7 +223,7 @@ module.exports = {
       spell_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        refereces: {
+        references: {
           model: 'Spells',
           key: 'id'
         }
@@ -231,7 +231,7 @@ module.exports = {
       origin_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        refereces: {
+        references: {
           model: 'Origins',
           key: 'id'
         }
