@@ -350,9 +350,44 @@ module.exports = {
       }
     });
 
+    await queryInterface.createTable('SpellLineages', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      spell_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Spells',
+          key: 'id'
+        }
+      },
+      lineage_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Lineages',
+          key: 'id'
+        }
+      },
+      createdAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      },
+      updatedAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      }
+    });
+
   },
 
   async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('SpellLineages');
     await queryInterface.dropTable('SpellClasses');
     await queryInterface.dropTable('SpellComponents');
     await queryInterface.dropTable('SpellMysteries');

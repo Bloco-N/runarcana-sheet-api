@@ -53,6 +53,32 @@ module.exports = {
       }
     });
 
+    await queryInterface.createTable('Lineages', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      origin_id :{
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      createdAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      },
+      updatedAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      }
+    });
+
     await queryInterface.createTable('Regions', {
       id: {
         type: Sequelize.INTEGER,
@@ -138,7 +164,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      origin: {
+      origin_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -146,7 +172,14 @@ module.exports = {
           key: 'id'
         }
       },
-      region: {
+      lineage_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Lineages',
+          key: 'id'
+        }
+      },
+      region_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -154,7 +187,7 @@ module.exports = {
           key: 'id'
         }
       },
-      past: {
+      past_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -162,7 +195,7 @@ module.exports = {
           key: 'id'
         }
       },
-      alignment: {
+      alignment_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -252,6 +285,7 @@ module.exports = {
     await queryInterface.dropTable('Alignments');
     await queryInterface.dropTable('Pasts');
     await queryInterface.dropTable('Regions');
+    await queryInterface.dropTable('Lineages');
     await queryInterface.dropTable('Origins');
     await queryInterface.dropTable('Users');
     await queryInterface.dropTable('RunarcanaClasses');

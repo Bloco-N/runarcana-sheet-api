@@ -1,3 +1,5 @@
+const { database } = require("pg/lib/defaults");
+
 module.exports = (sequelize, Sequelize, DataTypes) => {
   const Character = sequelize.define("Characters", {
     id: {
@@ -17,19 +19,22 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    origin: {
+    origin_id: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    region: {
+    lineage_id: {
+      type: DataTypes.INTEGER
+    },
+    region_id: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    past: {
+    past_id: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    alignment: {
+    alignment_id: {
       type: DataTypes.INTEGER,
       allowNull: false
     }
