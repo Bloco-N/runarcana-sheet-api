@@ -14,7 +14,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       allowNull: false
     },
     description: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     range_id: {
@@ -30,7 +30,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       allowNull: false
     },
     materials: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     }
   })

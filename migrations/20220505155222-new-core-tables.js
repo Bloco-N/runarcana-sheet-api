@@ -84,7 +84,7 @@ module.exports = {
         allowNull: false
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
       },
       range_id: {
@@ -112,7 +112,7 @@ module.exports = {
         }
       },
       materials: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
       },
       createdAt: {
