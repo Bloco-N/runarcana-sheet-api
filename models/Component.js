@@ -10,7 +10,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       allowNull: false
     },
     symbol: {
-      type: DataTypes.CHAR,
+      type: DataTypes.CHAR(1),
       allowNull: false
     }
   })

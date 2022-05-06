@@ -29,10 +29,10 @@ const create = async (req, res) => {
 
     await CreateSheetRequestValidator.validate(body);
     const response = await Sheet.create({ user_id: id, ...body })
-    res.status(200).json(response);
+    return res.status(200).json(response);
 
   } catch (error) {
-    res.status(error.status || 500).json({ messsage: error.message || error });
+    return res.status(error.status || 500).json({ messsage: error.message || error });
   }
 
 }
@@ -47,7 +47,7 @@ const list = async (req, res) => {
     return res.status(200).json(await userResult.getSheets())
 
   } catch (error) {
-    res.status(error.status || 500).json({ messsage: error.message || error });
+    return res.status(error.status || 500).json({ messsage: error.message || error });
   }
 
 }
@@ -63,7 +63,7 @@ const getById = async (req, res) => {
     return res.status(200).json(await sheet.toJSON());
 
   } catch (error) {
-    res.status(error.status || 500).json({ messsage: error.message || error });
+    return res.status(error.status || 500).json({ messsage: error.message || error });
   }
 
 }
@@ -77,11 +77,11 @@ const update = async (req, res) => {
     await CreateSheetRequestValidator.validate(body);
     const sheet = await makeSheet(id, userId);
     await sheet.update(body);
-    res.status(200).json({ message: "Sheet updated", sheet: await sheet.toJSON() });
+    return res.status(200).json({ message: "Sheet updated", sheet: await sheet.toJSON() });
 
 
   } catch (error) {
-    res.status(error.status || 500).json({ messsage: error.message || error });
+    return res.status(error.status || 500).json({ messsage: error.message || error });
   }
 }
 
@@ -97,7 +97,7 @@ const remove = async (req, res) => {
     return res.status(200).json('Sheet deleted');
 
   } catch (error) {
-    res.status(error.status || 500).json({ messsage: error.message || error });
+    return res.status(error.status || 500).json({ messsage: error.message || error });
   }
 
 }

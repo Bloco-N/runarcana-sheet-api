@@ -18,7 +18,7 @@ router.use(checkLogin);
 // spells endpoints
 
 router.get('/spells/', spellsController.listAllSpells);
-router.get('/spells/:idOrName', spellsController.getSpellByIdOrName);
+router.get('/spells/:id', spellsController.getSpellById);
 
 //sheet enpoints
 

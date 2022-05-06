@@ -18,7 +18,7 @@ const registerUser = async (req, res) => {
 
   } catch (error) {
     console.log(`An error ocurred: ${error}`);
-    res.status(error.status || 500).json({ message: `An error ocurred: ${error.message || error}` });
+    return res.status(error.status || 500).json({ message: `An error ocurred: ${error.message || error}` });
   }
 
 }
@@ -56,7 +56,7 @@ const loginUser = async (req, res) => {
 
   } catch (error) {
     console.log(`An error ocurred: ${error.message || error}`);
-    res.status(error.status || 500).json({ message: `An error ocurred: ${error.message || error}` });
+    return res.status(error.status || 500).json({ message: `An error ocurred: ${error.message || error}` });
   }
 
 }

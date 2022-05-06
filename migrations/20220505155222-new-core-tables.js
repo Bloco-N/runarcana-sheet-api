@@ -164,7 +164,7 @@ module.exports = {
         allowNull: false
       },
       symbol: {
-        type: Sequelize.CHAR,
+        type: Sequelize.CHAR(1),
         allowNull: false
       },
       createdAt: {

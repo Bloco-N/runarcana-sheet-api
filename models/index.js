@@ -85,11 +85,11 @@ db.past.hasMany(db.character, { foreignKey: 'past_id' })
 db.character.belongsTo(db.region, { foreignKey: 'region_id' })
 db.region.hasMany(db.character, { foreignKey: 'region_id' })
 
-db.lineage.belongsTo(db.origin, {foreignKey: 'origin_id'})
-db.origin.hasMany(db.lineage, {foreignKey: 'origin_id'})
+db.lineage.belongsTo(db.origin, { foreignKey: 'origin_id' })
+db.origin.hasMany(db.lineage, { foreignKey: 'origin_id' })
 
-db.character.belongsTo(db.lineage, {foreignKey: 'lineage_id'})
-db.lineage.hasMany(db.character, {foreignKey: 'lineage_id'})
+db.character.belongsTo(db.lineage, { foreignKey: 'lineage_id' })
+db.lineage.hasMany(db.character, { foreignKey: 'lineage_id' })
 
 db.spell.belongsToMany(db.lineage, { through: db.spellLineage, foreignKey: 'spell_id', otherKey: 'lineage_id' })
 db.lineage.belongsToMany(db.spell, { through: db.spellLineage, foreignKey: 'lineage_id', otherKey: 'spell_id' })

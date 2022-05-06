@@ -1,35 +1,89 @@
 const spellsDataOrigin = require('../magias_desc.json');
+const db = require('../models');
+const Spell = db.spell;
+const Range = db.range;
+const Conjuration = db.conjuration;
+const Duration = db.duration;
+const Component = db.component;
 
-const listAllSpells = (req, res) => {
+const listAllSpells = async (req, res) => {
   const { hasMaterial } = req.query;
 
-  let spellsData = spellsDataOrigin;
+  const response = await Spell.findAll({
+    attributes: ['id', 'name', 'level', 'description', 'materials'],
+    include: [
+      {
+        model: Range,
+        attributes: ['name']
+      },
+      {
+        model: Duration,
+        attributes: ['name']
+      },
+      {
+        model: Conjuration,
+        attributes: ['name']
+      },
+      {
+        model: Component,
+        attributes: ['name', 'symbol'],
+        through: {
+          attributes: []
+        }
+      }
+    ]
+  });
 
-  if (hasMaterial === 'yes') {
-    spellsData = spellsData.filter(item => item.materials !== "nenhum");
-  } else if (hasMaterial === 'no') {
-    spellsData = spellsData.filter(item => item.materials === "nenhum");
-  }
-
-  res.json(spellsData)
+  res.status(200).json(response);
 
 }
 
-const getSpellByIdOrName = (req, res) => {
-  const { idOrName } = req.params;
-  let spellsData = spellsDataOrigin;
+const getSpellById = async (req, res) => {
+  const { id } = req.params;
 
-  spellsData = spellsData.filter(item => item.name === idOrName);
-  if (spellsData.length > 0) return res.json(spellsData[0]);
-  else {
-    spellsData = spellsDataOrigin;
-    spellsData = spellsData.filter(item => item.id === Number(idOrName));
-    if (spellsData.length > 0) return res.json(spellsData[0]);
-    else return res.status(404).json('magia não encontrada');
+  try {
+
+    const response = await Spell.findOne({
+      where: { id },
+      attributes: ['id', 'name', 'level', 'description', 'materials'],
+      include: [
+        {
+          model: Range,
+          attributes: ['name']
+        },
+        {
+          model: Duration,
+          attributes: ['name']
+        },
+        {
+          model: Conjuration,
+          attributes: ['name']
+        },
+        {
+          model: Component,
+          attributes: ['name', 'symbol'],
+          through: {
+            attributes: []
+          }
+        }
+      ]
+    }
+    );
+    if (!response) throw {
+      status: 404,
+      message: 'speel not found'
+    }
+    return res.status(200).json(response.toJSON());
+
+  } catch (error) {
+    return res.status(error.status || 500).json({ message: `An error ocurred: ${error.message || error}` });
   }
+
+  res.json({});
+
 }
 module.exports = {
 
   listAllSpells,
-  getSpellByIdOrName,
+  getSpellById,
 }
