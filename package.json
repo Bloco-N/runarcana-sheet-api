@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "nodemon index.js",
     "migrate": "npx sequelize-cli db:migrate",
     "undo-migrate": "npx sequelize-cli db:migrate:undo",
@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/Bloco-N/runarcana-sheet-api#readme",
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "jest": "^28.1.0",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.3"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",

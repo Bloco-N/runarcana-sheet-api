@@ -13,7 +13,7 @@ module.exports =
   "test": {
     "username": DB_USERNAME,
     "password": DB_PASSWORD,
-    "database": DB_DATABASE,
+    "database": DB_DATABASE + '_test',
     "host": DB_HOST,
     "port": DB_PORT,
     "dialect": DB_DIALECT

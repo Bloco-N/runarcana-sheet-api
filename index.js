@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const router = require('./routes');
 const cors = require('cors')
-require('dotenv').config()
+require("dotenv").config({
+  path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env'
+});
 
 app.use(cors())
 
@@ -16,3 +18,5 @@ app.get('/', (req, res) => {
 
 
 app.listen(process.env.PORT, () => console.log(`server listening on port ${process.env.PORT}`));
+
+module.exports = app;
