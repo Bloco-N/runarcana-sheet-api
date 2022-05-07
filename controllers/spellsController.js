@@ -7,7 +7,6 @@ const Duration = db.duration;
 const Component = db.component;
 
 const listAllSpells = async (req, res) => {
-  const { hasMaterial } = req.query;
 
   const response = await Spell.findAll({
     attributes: ['id', 'name', 'level', 'description', 'materials'],
