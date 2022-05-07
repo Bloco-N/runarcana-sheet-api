@@ -1,23 +1,23 @@
 const db = require('../models');
-const CreateSheetRequestValidator = require('../validations/CreateSheetRequest');
+const CreateCharacterRequestValidator = require('../validations/CreateCharacterRequest');
 const User = db.user;
-const Sheet = db.sheet;
+const Character = db.character;
 
-const makeSheet = async (id, userId) => {
+const makeCharacter = async (id, userId) => {
 
-  const sheet = await Sheet.findOne({ where: { id } });
-  if (!sheet) throw {
+  const character = await character.findOne({ where: { id } });
+  if (!character) throw {
     status: 404,
-    message: "Sheet not found"
+    message: "Character not found"
   }
-  const { dataValues: user } = await sheet.getUser();
+  const { dataValues: user } = await character.getUser();
 
   if (user.id !== userId) throw {
     status: 401,
     message: "You don't have access to this content"
   }
 
-  return sheet;
+  return character;
 
 }
 
@@ -27,8 +27,8 @@ const create = async (req, res) => {
 
   try {
 
-    await CreateSheetRequestValidator.validate(body);
-    const response = await Sheet.create({ user_id: id, ...body })
+    await CreateCharacterRequestValidator.validate(body);
+    const response = await Character.create({ user_id: id, ...body })
     return res.status(200).json(response);
 
   } catch (error) {
@@ -44,7 +44,7 @@ const list = async (req, res) => {
   try {
 
     const userResult = await User.findOne({ where: user.id });
-    return res.status(200).json(await userResult.getSheets())
+    return res.status(200).json(await userResult.getCharacters())
 
   } catch (error) {
     return res.status(error.status || 500).json({ messsage: error.message || error });
@@ -59,8 +59,8 @@ const getById = async (req, res) => {
 
   try {
 
-    const sheet = await makeSheet(id, userId);
-    return res.status(200).json(await sheet.toJSON());
+    const character = await makeCharacter(id, userId);
+    return res.status(200).json(await character.toJSON());
 
   } catch (error) {
     return res.status(error.status || 500).json({ messsage: error.message || error });
@@ -74,10 +74,10 @@ const update = async (req, res) => {
 
   try {
 
-    await CreateSheetRequestValidator.validate(body);
-    const sheet = await makeSheet(id, userId);
-    await sheet.update(body);
-    return res.status(200).json({ message: "Sheet updated", sheet: await sheet.toJSON() });
+    await CreateCharacterRequestValidator.validate(body);
+    const character = await makeCharacter(id, userId);
+    await character.update(body);
+    return res.status(200).json({ message: "Character updated", character: await character.toJSON() });
 
 
   } catch (error) {
@@ -92,9 +92,9 @@ const remove = async (req, res) => {
 
   try {
 
-    const sheet = await makeSheet(id, userId);
-    sheet.destroy();
-    return res.status(200).json('Sheet deleted');
+    const character = await makeCharacter(id, userId);
+    character.destroy();
+    return res.status(200).json('Character deleted');
 
   } catch (error) {
     return res.status(error.status || 500).json({ messsage: error.message || error });

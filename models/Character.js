@@ -16,8 +16,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       allowNull: false
     },
     level: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+      type: DataTypes.INTEGER
     },
     origin_id: {
       type: DataTypes.INTEGER,

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const spellsController = require('./controllers/spellsController');
 const userController = require('./controllers/userController');
-const sheetController = require('./controllers/sheetController');
+const charController = require('./controllers/charController');
 const checkLogin = require('./middlewares/checkLogin');
 
 // user endpoints
@@ -22,11 +22,11 @@ router.get('/spells/:id', spellsController.getSpellById);
 
 //sheet enpoints
 
-router.get('/sheets', sheetController.list);
-router.get('/sheets/:id', sheetController.getById);
-router.post('/sheets', sheetController.create);
-router.put('/sheets/:id', sheetController.update);
-router.delete('/sheets/:id', sheetController.remove);
+router.get('/chars', charController.list);
+router.get('/chars/:id', charController.getById);
+router.post('/chars', charController.create);
+router.put('/chars/:id', charController.update);
+router.delete('/chars/:id', charController.remove);
 
 
 module.exports = router;

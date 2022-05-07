@@ -168,6 +168,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      level: {
+        type: Sequelize.INTEGER
+      },
       origin_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
