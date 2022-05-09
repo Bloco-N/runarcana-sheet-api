@@ -1,29 +1,6 @@
 'use strict';
 
-let pasts = [
-  'Andarilho',
-  'Apostador',
-  'Aristocrata',
-  'Artesão',
-  'Artista',
-  'Charlatão',
-  'Criação',
-  'Criminoso',
-  'Desconhecido',
-  'Estudioso',
-  'Exilado',
-  'Forasteiro',
-  'Gladiador',
-  'Herói Local',
-  'Inventor',
-  'Investigador',
-  'Marujo',
-  'Mercenário',
-  'Órfão',
-  'Pirata',
-  'Religioso',
-  'Soldado',
-]
+let pasts = require('../dataSource/pasts.json');
 
 pasts = pasts.map(past => {
 

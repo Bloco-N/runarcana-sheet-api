@@ -12,7 +12,6 @@ conjurations = conjurations.map(conjuration => {
 
 })
 
-
 module.exports = {
   async up (queryInterface, Sequelize) {
 

@@ -1,26 +1,25 @@
 'use strict';
 
-const spells = require('../dataSource/spells.json')
+const spells = require('../dataSource/spells.json');
+let origins = require('../dataSource/origins.json');
 
-const origins = ['Humano','Antroplantae','Construto','Meio-Dragão','Minotauro','Troll','Vastaya','Yordle']
+origins = origins.map(origin => origin.name);
 
-let spellOrigins = []
-spells.forEach((spell, index) => {
+let spellOrigins = [];
+spells.forEach((spell, spellIndex) => {
+  spell.origins.forEach(origin => {
 
-  for(let origin of spell.origins){
     if(origins.includes(origin)){
       spellOrigins.push({
-
-        spell_id : index + 1,
+        spell_id : spellIndex + 1,
         origin_id : origins.indexOf(origin) + 1,
         createdAt: new Date(),
         updatedAt: new Date()
-  
-      })
+      });
     }
-  }
 
-})
+  });
+});
 
 
 module.exports = {

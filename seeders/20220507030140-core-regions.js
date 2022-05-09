@@ -1,19 +1,6 @@
 'use strict';
 
-let regions = [
-  'Águas de Sentina',
-  'Bandópolis',
-  'Demacia',
-  'Freljord',
-  'Ilha das Sombras',
-  'Ionia',
-  'Ixtal',
-  'Noxus',
-  'Piltover',
-  'Shurima',
-  'Targon',
-  'Zaun'
-]
+let regions = require('../dataSource/regions.json');
 
 regions = regions.map(region => {
 

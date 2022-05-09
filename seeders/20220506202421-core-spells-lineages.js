@@ -1,36 +1,27 @@
 'use strict';
 
-const spells = require('../dataSource/spells.json')
+const spells = require('../dataSource/spells.json');
+const origins = require('../dataSource/origins.json');
 
-let lineages = [ ['Arbóreo', 'Antroplantae'] , ['Floral', 'Antroplantae'],
-['Brutal', 'Construto'] , ['Emissário', 'Construto'], ['Ligeiro', 'Construto'],
-['Aquáticos', 'Yordle'], ['Felpudo', 'Yordle'],
-['Elemental Glacial', 'Meio-Dragão'], ['Elemental Infernal', 'Meio-Dragão'], ['Elemental da Montanha', 'Meio-Dragão'],
-['Elemental das Nuvens', 'Meio-Dragão'], ['Elemental do Oceano', 'Meio-Dragão'],
-['Oovi-Kat','Vastaya'], ['Marai','Vastaya'], ['Shimon','Vastaya'], ['Fauhwoon','Vastaya'],
-['Ottrani','Vastaya'], ['Kiilash','Vastaya'], ['Lhotlan','Vastaya'],
-['Troll da Areia','Troll'], ['Troll do Gelo','Troll'], ['Troll da Selva','Troll'],
-['Aelus','Minotauro'], ['Alnuk','Minotauro'], ['Auroque','Minotauro']]
+let lineages = [];
+origins.forEach(origin => origin.lineages.forEach(lineage => lineages.push(lineage)));
 
-lineages = lineages.map(lineage => lineage[0])
+let spellLineages = [];
+spells.forEach((spell, spellIndex) => {
+  spell.origins.forEach(lineage => {
 
-let spellLineages = []
-spells.forEach((spell, index) => {
-
-  for(let lineage of spell.origins){
     if(lineages.includes(lineage)){
       spellLineages.push({
-
-        spell_id : index + 1,
+        spell_id : spellIndex + 1,
         lineage_id : lineages.indexOf(lineage) + 1,
         createdAt: new Date(),
         updatedAt: new Date()
-  
-      })
+      });
     }
-  }
 
-})
+  });
+});
+
 
 
 module.exports = {

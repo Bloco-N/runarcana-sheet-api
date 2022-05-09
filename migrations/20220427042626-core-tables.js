@@ -127,28 +127,6 @@ module.exports = {
       }
     });
 
-    await queryInterface.createTable('Alignments', {
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-      },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      createdAt: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-      },
-      updatedAt: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-      }
-    });
-
     await queryInterface.createTable('Characters', {
       id: {
         type: Sequelize.INTEGER,
@@ -199,14 +177,6 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'Pasts',
-          key: 'id'
-        }
-      },
-      alignment_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Alignments',
           key: 'id'
         }
       },
@@ -289,7 +259,6 @@ module.exports = {
 
     await queryInterface.dropTable('CharClasses');
     await queryInterface.dropTable('Characters');
-    await queryInterface.dropTable('Alignments');
     await queryInterface.dropTable('Pasts');
     await queryInterface.dropTable('Regions');
     await queryInterface.dropTable('Lineages');

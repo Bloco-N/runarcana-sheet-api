@@ -1,25 +1,21 @@
 'use strict';
 
-let spells = require('../dataSource/spells.json')
-
-const classes = ['Acólito', 'Arcano', 'Atirador', 'Bodisatva', 'Bruto','Caçador',  'Combatente', 'Mercurial', 'Peregrino',
-'Tecmaturgo', 'Xamã']
+const spells = require('../dataSource/spells.json')
+const runarcanaClasses = require('../dataSource/runarcanaClasses.json')
 
 let spellClasses = []
-spells.forEach((spell, index) => {
+spells.forEach((spell, spellIndex) => {
+  spell.classes.forEach((runarcanaClass) =>{
 
-  for(let runarcanaClass of spell.classes){
     spellClasses.push({
-
-      spell_id : index + 1,
-      class_id : classes.indexOf(runarcanaClass) + 1,
+      spell_id : spellIndex + 1,
+      class_id : runarcanaClasses.indexOf(runarcanaClass) + 1,
       createdAt: new Date(),
       updatedAt: new Date()
-
     })
-  }
 
-})
+  });
+});
 
 
 module.exports = {

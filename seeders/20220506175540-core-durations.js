@@ -12,7 +12,6 @@ durations = durations.map(duration => {
 
 })
 
-
 module.exports = {
   async up (queryInterface, Sequelize) {
 

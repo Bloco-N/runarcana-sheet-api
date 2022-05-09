@@ -41,7 +41,6 @@ db.spellComponent = require('./SpellComponent')(sequelize, Sequelize, DataTypes)
 db.spellMystery = require('./SpellMystery.js')(sequelize, Sequelize, DataTypes);
 db.spellOrigin = require('./SpellOrigin.js')(sequelize, Sequelize, DataTypes);
 db.spellClass = require('./SpellClass.js')(sequelize, Sequelize, DataTypes);
-db.alignment = require('./Alignment.js')(sequelize, Sequelize, DataTypes);
 db.past = require('./Past.js')(sequelize, Sequelize, DataTypes);
 db.region = require('./Region.js')(sequelize, Sequelize, DataTypes);
 db.lineage = require('./Lineage')(sequelize, Sequelize, DataTypes);
@@ -75,9 +74,6 @@ db.runarcanaClass.belongsToMany(db.spell, { through: db.spellClass, foreignKey: 
 //char-origin associations
 db.character.belongsTo(db.origin, { foreignKey: 'origin_id' })
 db.origin.hasMany(db.character, { foreignKey: 'origin_id' })
-//char-alingment associations
-db.character.belongsTo(db.alignment, { foreignKey: 'alignment_id' })
-db.alignment.hasMany(db.character, { foreignKey: 'alignment_id' })
 //char-past associations
 db.character.belongsTo(db.past, { foreignKey: 'past_id' })
 db.past.hasMany(db.character, { foreignKey: 'past_id' })

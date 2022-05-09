@@ -12,10 +12,9 @@ ranges = ranges.map(range => {
 
 })
 
-
 module.exports = {
   async up (queryInterface, Sequelize) {
-
+    
      await queryInterface.bulkInsert('Ranges', ranges , {});
   },
 

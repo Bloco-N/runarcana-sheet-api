@@ -1,11 +1,11 @@
 'use strict';
 
-let origins = ['Humano','Antroplantae','Construto','Meio-Dragão','Minotauro','Troll','Vastaya','Yordle']
+let origins = require('../dataSource/origins.json');
 
 origins = origins.map(origin => {
 
   return {
-    name : origin,
+    name : origin.name,
     createdAt: new Date(),
     updatedAt: new Date()
   }

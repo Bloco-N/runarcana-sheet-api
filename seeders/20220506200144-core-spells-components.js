@@ -1,25 +1,23 @@
 'use strict';
 
-let spells = require('../dataSource/spells.json')
+const spells = require('../dataSource/spells.json');
+let components = require('../dataSource/components.json')
 
-const components = ['V','S','M']
+components = components.map(components => components.symbol);
 
 let SpellComponents = []
-spells.forEach((spell, index) => {
+spells.forEach((spell, spellIndex) => {
+  spell.components.forEach(component => {
 
-  for(let component of spell.components){
     SpellComponents.push({
-
-      spell_id : index + 1,
+      spell_id : spellIndex + 1,
       component_id : components.indexOf(component) + 1,
       createdAt: new Date(),
       updatedAt: new Date()
+    });
 
-    })
-  }
-
-})
-
+  });
+});
 
 module.exports = {
   async up (queryInterface, Sequelize) {
