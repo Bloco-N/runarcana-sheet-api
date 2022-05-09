@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize, DataTypes) => {
-  const Mystery = sequelize.define("Mysteries", {
+  const MagicalSource = sequelize.define("MagicalSources", {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -9,14 +9,10 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    source_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
     description: {
       type: DataTypes.TEXT,
       allowNull: false
     }
   })
-  return Mystery;
+  return MagicalSource;
 }

@@ -30,6 +30,7 @@ db.runarcanaClass.belongsToMany(db.character, { through: db.charClass, foreignKe
 db.character.belongsToMany(db.runarcanaClass, { through: db.charClass, foreignKey: 'char_id', otherKey: 'class_id' })
 
 db.spell = require('./Spell.js')(sequelize, Sequelize, DataTypes);
+db.magicalSource = require('./MagicalSource.js')(sequelize, Sequelize, DataTypes);
 db.mystery = require('./Mystery.js')(sequelize, Sequelize, DataTypes);
 db.component = require('./Component.js')(sequelize, Sequelize, DataTypes);
 db.origin = require('./Origin.js')(sequelize, Sequelize, DataTypes);
@@ -90,8 +91,8 @@ db.lineage.hasMany(db.character, { foreignKey: 'lineage_id' })
 db.spell.belongsToMany(db.lineage, { through: db.spellLineage, foreignKey: 'spell_id', otherKey: 'lineage_id' })
 db.lineage.belongsToMany(db.spell, { through: db.spellLineage, foreignKey: 'lineage_id', otherKey: 'spell_id' })
 
-
-
+db.mystery.belongsTo(db.magicalSource, { foreignKey: 'source_id' });
+db.magicalSource.hasMany(db.mystery, { foreignKey: 'source_id' });
 
 
 module.exports = db;

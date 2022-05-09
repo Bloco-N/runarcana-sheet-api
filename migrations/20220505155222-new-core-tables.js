@@ -127,6 +127,32 @@ module.exports = {
       }
     });
 
+    await queryInterface.createTable('MagicalSources', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      createdAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      },
+      updatedAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      }
+    });
+
     await queryInterface.createTable('Mysteries', {
       id: {
         type: Sequelize.INTEGER,
@@ -138,8 +164,16 @@ module.exports = {
         allowNull: false
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
+      },
+      source_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'MagicalSources',
+          key: 'id'
+        }
       },
       createdAt: {
         type: Sequelize.DATEONLY,
