@@ -429,6 +429,7 @@ module.exports = {
     await queryInterface.dropTable('SpellBooks');
     await queryInterface.dropTable('Components');
     await queryInterface.dropTable('Mysteries');
+    await queryInterface.dropTable('MagicalSources');
     await queryInterface.dropTable('Spells');
     await queryInterface.dropTable('Durations');
     await queryInterface.dropTable('Conjurations');
