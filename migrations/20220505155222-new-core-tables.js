@@ -428,6 +428,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
       mystery_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -451,8 +455,8 @@ module.exports = {
     await queryInterface.createTable('ElementalDependencies', {
       id: {
         type: Sequelize.INTEGER,
-          primaryKey: true,
-          autoIncrement: true
+        primaryKey: true,
+        autoIncrement: true
       },
       dependent_id: {
         type: Sequelize.INTEGER,
@@ -508,23 +512,23 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
-    },
-    char_id: {
+      },
+      char_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'Characters',
           key: 'id'
         }
-    },
-    element_id: {
+      },
+      element_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'Elements',
           key: 'id'
         }
-    },
+      },
       createdAt: {
         type: Sequelize.DATEONLY,
         allowNull: false,

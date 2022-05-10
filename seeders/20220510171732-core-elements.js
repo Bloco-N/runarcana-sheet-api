@@ -7,16 +7,14 @@ mysteries = mysteries.map(mystery => mystery.name);
 
 elements = elements.map(element => {
 
-  if(mystery.source === 'Elemental'){
-    return {
-      name: element.name,
-      description: element.description,
-      mystery_id: mysteries.indexOf(element.name),
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }
+  return {
+    name: element.name,
+    description: element.description,
+    mystery_id: mysteries.indexOf(element.name) + 1,
+    createdAt: new Date(),
+    updatedAt: new Date()
   }
-  
+
 })
 
 module.exports = {
