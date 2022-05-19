@@ -452,61 +452,6 @@ module.exports = {
       }
     });
 
-    await queryInterface.createTable('ElementalDependencies', {
-      id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
-      },
-      dependent_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Elements',
-          key: 'id'
-        }
-      },
-      dependendency_one_id: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Elements',
-          key: 'id'
-        }
-      },
-      dependendency_two_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Elements',
-          key: 'id'
-        }
-      },
-      dependendency_three_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Elements',
-          key: 'id'
-        }
-      },
-      dependendency_four_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Elements',
-          key: 'id'
-        }
-      },
-      createdAt: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-      },
-      updatedAt: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-        defaultValue: Sequelize.NOW
-      }
-    });
-
     await queryInterface.createTable('CharElements', {
       id: {
         type: Sequelize.INTEGER,
@@ -545,7 +490,6 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('CharElements');
-    await queryInterface.dropTable('ElementalDependencies');
     await queryInterface.dropTable('Elements');
     await queryInterface.dropTable('SpellLineages');
     await queryInterface.dropTable('SpellClasses');

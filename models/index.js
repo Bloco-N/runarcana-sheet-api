@@ -48,7 +48,6 @@ db.lineage = require('./Lineage.js')(sequelize, Sequelize, DataTypes);
 db.spellLineage = require('./SpellLineage.js')(sequelize, Sequelize, DataTypes);
 
 db.element = require('./Element.js')(sequelize, Sequelize, DataTypes);
-db.elementalDependency = require('./ElementalDependency.js')(sequelize, Sequelize, DataTypes);
 db.charElement = require('./CharElement.js')(sequelize, Sequelize, DataTypes);
 
 
@@ -97,16 +96,6 @@ db.lineage.belongsToMany(db.spell, { through: db.spellLineage, foreignKey: 'line
 
 db.mystery.belongsTo(db.magicalSource, { foreignKey: 'source_id' });
 db.magicalSource.hasMany(db.mystery, { foreignKey: 'source_id' });
-
-db.element.belongsToMany(db.element, { through: db.elementalDependency, foreignKey: 'dependent_id', otherKey: 'dependency_one_id' })
-db.element.belongsToMany(db.element, { through: db.elementalDependency, foreignKey: 'dependent_id', otherKey: 'dependency_two_id' })
-db.element.belongsToMany(db.element, { through: db.elementalDependency, foreignKey: 'dependent_id', otherKey: 'dependency_three_id' })
-db.element.belongsToMany(db.element, { through: db.elementalDependency, foreignKey: 'dependent_id', otherKey: 'dependency_four_id' })
-
-db.element.belongsToMany(db.element, { through: db.elementalDependency, foreignKey: 'dependency_one_id', otherKey: 'dependent_id' })
-db.element.belongsToMany(db.element, { through: db.elementalDependency, foreignKey: 'dependency_two_id', otherKey: 'dependent_id' })
-db.element.belongsToMany(db.element, { through: db.elementalDependency, foreignKey: 'dependency_three_id', otherKey: 'dependent_id' })
-db.element.belongsToMany(db.element, { through: db.elementalDependency, foreignKey: 'dependency_four_id', otherKey: 'dependent_id' })
 
 db.character.belongsToMany(db.element, { through: db.charElement, foreignKey: 'char_id', otherKey: 'element_id' })
 db.element.belongsToMany(db.character, { through: db.charElement, foreignKey: 'element_id', otherKey: 'char_id' })
