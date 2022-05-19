@@ -452,6 +452,66 @@ module.exports = {
       }
     });
 
+    await queryInterface.createTable('ElementRecipes', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      element_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Elements',
+          key: 'id'
+        }
+      },
+      createdAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      },
+      updatedAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      }
+    });
+
+    await queryInterface.createTable('ElementIngredients', {
+      id: {
+        type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      recipe_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'ElementRecipes',
+          key: 'id'
+        }
+      },
+      element_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Elements',
+          key: 'id'
+        }
+      },
+      createdAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      },
+      updatedAt: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      }
+    });
+
     await queryInterface.createTable('CharElements', {
       id: {
         type: Sequelize.INTEGER,
@@ -490,6 +550,8 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('CharElements');
+    await queryInterface.dropTable('ElementIgredients');
+    await queryInterface.dropTable('ElementRecipes');
     await queryInterface.dropTable('Elements');
     await queryInterface.dropTable('SpellLineages');
     await queryInterface.dropTable('SpellClasses');

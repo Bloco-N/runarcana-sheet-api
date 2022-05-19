@@ -48,6 +48,8 @@ db.lineage = require('./Lineage.js')(sequelize, Sequelize, DataTypes);
 db.spellLineage = require('./SpellLineage.js')(sequelize, Sequelize, DataTypes);
 
 db.element = require('./Element.js')(sequelize, Sequelize, DataTypes);
+db.elementRecipe = require('./ElementRecipe.js')(sequelize, Sequelize, DataTypes);
+db.elementIngredient = require('./ElementIngredient.js')(sequelize, Sequelize, DataTypes);
 db.charElement = require('./CharElement.js')(sequelize, Sequelize, DataTypes);
 
 
@@ -99,5 +101,13 @@ db.magicalSource.hasMany(db.mystery, { foreignKey: 'source_id' });
 
 db.character.belongsToMany(db.element, { through: db.charElement, foreignKey: 'char_id', otherKey: 'element_id' })
 db.element.belongsToMany(db.character, { through: db.charElement, foreignKey: 'element_id', otherKey: 'char_id' })
+
+db.elementRecipe.belongsTo(db.element, { foreignKey: 'element_id' });
+db.element.hasMany(db.elementRecipe, { foreignKey: 'element_id' });
+
+db.elementIngredient.belongsTo(db.elementRecipe, { foreignKey: 'recipe_id' });
+db.elementRecipe.hasMany(db.elementIngredient, { foreignKey: 'recipe_id' });
+db.elementIngredient.belongsTo(db.element, { foreignKey: 'element_id' });
+db.element.hasMany(db.elementIngredient, { foreignKey: 'element_id' });
 
 module.exports = db;
