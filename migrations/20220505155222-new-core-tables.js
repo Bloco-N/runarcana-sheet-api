@@ -550,7 +550,7 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('CharElements');
-    await queryInterface.dropTable('ElementIgredients');
+    await queryInterface.dropTable('ElementIngredients');
     await queryInterface.dropTable('ElementRecipes');
     await queryInterface.dropTable('Elements');
     await queryInterface.dropTable('SpellLineages');
