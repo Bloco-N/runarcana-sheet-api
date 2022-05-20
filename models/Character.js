@@ -36,7 +36,19 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
     alignment_id: {
       type: DataTypes.INTEGER,
       allowNull: false
-    }
+    },
+    essence: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    expression: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    exaltation: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
 
   })
 

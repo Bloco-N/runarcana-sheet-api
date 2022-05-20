@@ -180,6 +180,18 @@ module.exports = {
           key: 'id'
         }
       },
+      essence: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      expression: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      exaltation: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       createdAt: {
         type: Sequelize.DATEONLY,
         allowNull: false,
